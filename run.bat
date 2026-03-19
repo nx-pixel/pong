@@ -25,12 +25,16 @@ if not exist %VENV_NAME% (
     echo [1/3] Using existing environment...
 )
 
-:: [2/3] Активация окружения и установка зависимостей
+:: [2/3] Активация окружения
 call %VENV_NAME%\Scripts\activate.bat
 
-:: Устанавливаем зависимости (pip обновится сам если надо)
+:: Обновляем pip (исправленная команда)
+echo Updating pip...
+python -m pip install --upgrade pip
+
+:: Устанавливаем зависимости (одной командой)
 echo Installing dependencies...
-pip install -q requests tqdm pygame numpy
+pip install requests tqdm pygame numpy
 
 :: [3/3] Запуск игры
 echo [2/3] Starting game...
