@@ -75,9 +75,9 @@ def show_menu():
 
     # Текст для уровней с описанием
     levels = [
-        {"name": "ЛЕГКИЙ", "description": "Простой алгоритм", "level": "easy", "color": GREEN, "rect": None, "desc_rect": None},
-        {"name": "СРЕДНИЙ", "description": "ИИ первого поколения", "level": "medium", "color": YELLOW, "rect": None, "desc_rect": None},
-        {"name": "ТЯЖЕЛЫЙ", "description": "ИИ второго поколения", "level": "hard", "color": RED, "rect": None, "desc_rect": None}
+        {"name": "ПЕРВЫЙ", "description": "Простой алгоритм", "level": "easy", "color": GREEN, "rect": None, "desc_rect": None},
+        {"name": "ВТОРОЙ", "description": "ИИ первого поколения", "level": "medium", "color": YELLOW, "rect": None, "desc_rect": None},
+        {"name": "ТРЕТИЙ", "description": "ИИ второго поколения", "level": "hard", "color": RED, "rect": None, "desc_rect": None}
     ]
 
     # Позиции для уровней
