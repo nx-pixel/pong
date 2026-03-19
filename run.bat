@@ -1,4 +1,5 @@
 @echo off
+chcp 65001 >nul
 title Pong with AI
 
 SET VENV_NAME=pong_ai_env
@@ -24,19 +25,19 @@ if not exist %VENV_NAME% (
     echo [1/3] Using existing environment...
 )
 
-:: [2/3] Активация и проверка зависимостей
+:: Активируем окружение
 call %VENV_NAME%\Scripts\activate.bat
 
-:: Проверяем pygame (как индикатор установленных зависимостей)
-pip show pygame >nul 2>&1
-if errorlevel 1 (
-    echo Installing dependencies...
-    pip install -q --upgrade pip
-    pip install -q requests tqdm pygame numpy
-)
+:: [2/3] Обновляем pip правильным способом
+echo [2/3] Checking pip...
+python -m pip install --upgrade pip >nul 2>&1
+
+:: Устанавливаем зависимости
+echo Installing dependencies...
+python -m pip install -q requests tqdm pygame numpy
 
 :: [3/3] Запуск игры
-echo [2/3] Starting game...
+echo [3/3] Starting game...
 python ping_pong_with_AI.py
 
 :: Деактивация
