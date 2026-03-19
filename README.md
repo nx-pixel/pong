@@ -73,7 +73,7 @@ text
 
 bash
 # Клонируйте репозиторий
-git clone https://github.com/Annuta/ping_pong_with_AI.git
+git clone https://github.com/nx-pixel/pong.git
 cd ping_pong_with_AI
 
 # Создайте виртуальное окружение
