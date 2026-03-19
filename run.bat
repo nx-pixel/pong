@@ -7,40 +7,41 @@ SET MODELS_DIR=tables
 echo ===== PONG WITH AI =====
 echo.
 
-:: Проверяем Python (быстрая проверка)
-python --version >nul 2>&1 || (
-    echo [ОШИБКА] Python не установлен!
+:: Проверяем Python
+python --version >nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] Python not installed!
+    echo Download Python from https://www.python.org/downloads/
     pause
     exit /b 1
 )
 
-:: [1/3] Быстрая проверка окружения
+:: [1/3] Проверка окружения
 if not exist %VENV_NAME% (
-    echo [1/3] Первый запуск: создание окружения...
+    echo [1/3] First run: creating environment...
     python -m venv %VENV_NAME%
-    call %VENV_NAME%\Scripts\activate.bat
-    pip install -q --upgrade pip
-    pip install -q requests tqdm pygame numpy
 ) else (
-    echo [1/3] Запуск в существующем окружении...
-    call %VENV_NAME%\Scripts\activate.bat
+    echo [1/3] Using existing environment...
 )
 
-:: [2/3] Быстрая проверка моделей (только если отсутствуют)
-if not exist %MODELS_DIR%\gen_1_q_table_and_params_4901.pkl (
-    echo [2/3] Первый запуск: загрузка моделей...
-    python download_models.py
-) else (
-    echo [2/3] Модели готовы
+:: [2/3] Активация и проверка зависимостей
+call %VENV_NAME%\Scripts\activate.bat
+
+:: Проверяем pygame (как индикатор установленных зависимостей)
+pip show pygame >nul 2>&1
+if errorlevel 1 (
+    echo Installing dependencies...
+    pip install -q --upgrade pip
+    pip install -q requests tqdm pygame numpy
 )
 
 :: [3/3] Запуск игры
-echo [3/3] Запуск игры...
+echo [2/3] Starting game...
 python ping_pong_with_AI.py
 
 :: Деактивация
-call %VENV_NAME%\Scripts\deactivate.bat
+call %VENV_NAME%\Scripts\deactivate.bat >nul 2>&1
 
 echo.
-echo Спасибо за игру!
+echo Thanks for playing!
 pause
