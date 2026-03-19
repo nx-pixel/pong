@@ -25,19 +25,15 @@ if not exist %VENV_NAME% (
     echo [1/3] Using existing environment...
 )
 
-:: Активируем окружение
+:: [2/3] Активация окружения и установка зависимостей
 call %VENV_NAME%\Scripts\activate.bat
 
-:: [2/3] Обновляем pip правильным способом
-echo [2/3] Checking pip...
-python -m pip install --upgrade pip >nul 2>&1
-
-:: Устанавливаем зависимости
+:: Устанавливаем зависимости (pip обновится сам если надо)
 echo Installing dependencies...
-python -m pip install -q requests tqdm pygame numpy
+pip install -q requests tqdm pygame numpy
 
 :: [3/3] Запуск игры
-echo [3/3] Starting game...
+echo [2/3] Starting game...
 python ping_pong_with_AI.py
 
 :: Деактивация
